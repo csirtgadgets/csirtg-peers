@@ -1,0 +1,26 @@
+sudo: required
+language: python
+cache: pip
+python:
+- 3.6
+- 3.7
+- 3.8
+before_install:
+- pip install -r dev_requirements.txt
+script:
+- python setup.py develop
+- python setup.py test
+- python setup.py sdist bdist bdist_wheel
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+deploy:
+  provider: pypi
+  user: __token__
+  on:
+    branch: master
+    tags: true
+    condition: $TRAVIS_PYTHON_VERSION = "3.8"
+  password:
+    secure: XRkCnCb7ICX7FAakvndxbxlhP/KiJrit+aMTO/hhHQb3v7nBDMnff8gU+9Zq0OP6f7PNUHuqKBNvbO6RnkFCkx4rsw+Rh6o+lXNcBbRR1Y8Lsl5wXFYSiBj1hC6eB7h4Ww+zOLifg47sHrPm2EL3RQJLkLTGKKB885S88repBOKbFm7kf0TveQOe93062nxQYvQ9gp/o5wb1fP0iG3RGsC54qksWQG0xsWcPXkkhpaWdDUfBHAGzkFv21BuAORRwSCIw9TW+qSIM0ELUmAty4q0Hg4w28NojQ2IgcL11bgTMyA7Bam5qKopscJPADPzOCrvMCgReA6Gt+z3kAGJVu+DviW7UkefNrXaTxzKdA37XrTQPlTmwdAO4sWT2881JseFKC/NZeHTe0PIm3+N9amYN11PLqDvLL4San2E7Jyegq5Di7mxSKPlmqaH++bP7TpuhxkPEcYRyoc+dlkLHAqCn/Jr5eX96uGXTL5ytCZvr/W6rlQTSx+Z8vXvIFucp+ibPch+bVlEkNwOX49dB257LVLtsqxY3RxdiAYXXyr/5XowhIm9KxFy/1fmeG5Feo7+8SESvm4V266ZoafBMu2y4LW54xV6ek9/Vx/zVy+Ev/QLjOJPdV5cmr/dB/feQVbtiOfnsipd15ZXzlGMCOT8SJRNq0qzdt2AjxHYF8Ew=
