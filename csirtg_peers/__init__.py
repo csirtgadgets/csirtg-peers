@@ -76,7 +76,12 @@ Returns:
     # 701 1239 3549 3561 7132 | 216.90.108.0/24 | US | arin | 1998-09-25
     for p in _get(f"0.{ip[1]}.{ip[2]}.{ip[3]}.peer.asn.cymru.com"):
         bits = str(p).replace('"', '').strip().split(' | ')
-        asn, prefix, cc, rir, _ = bits
+
+        try:
+            asn, prefix, cc, rir, _ = bits
+
+        except ValueError:
+            asn, prefix, cc, rir = bits
 
         asns = asn.split(' ')
         for a in asns:
