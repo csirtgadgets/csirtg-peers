@@ -75,13 +75,14 @@ Returns:
     # 23028 | 216.90.108.0/24 | US | arin | 1998-09-25
     # 701 1239 3549 3561 7132 | 216.90.108.0/24 | US | arin | 1998-09-25
     for p in _get(f"0.{ip[1]}.{ip[2]}.{ip[3]}.peer.asn.cymru.com"):
-        bits = str(p).replace('"', '').strip().split(' | ')
+        bits = str(p).replace('"', '').strip().split('|')
+        bits = [b.strip() for b in bits]
 
         try:
-            asn, prefix, cc, rir, _ = bits
+            asn, prefix, cc, rir, dt = bits
 
         except ValueError:
-            asn, prefix, cc, rir = bits
+            raise ValueError(f"Unable to parse: {p}")
 
         asns = asn.split(' ')
         for a in asns:
@@ -89,7 +90,8 @@ Returns:
                 'asn': a,
                 'prefix': prefix,
                 'cc': cc,
-                'rir': rir
+                'rir': rir,
+                'dt': dt
             }
 
 
