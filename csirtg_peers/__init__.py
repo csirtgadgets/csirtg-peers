@@ -77,6 +77,10 @@ Returns:
     for p in _get(f"0.{ip[1]}.{ip[2]}.{ip[3]}.peer.asn.cymru.com"):
         bits = str(p).replace('"', '').strip().split('|')
         bits = [b.strip() for b in bits]
+        for idx, e in enumerate(bits):
+            bits[idx] = e.strip()
+            if e == '':
+                bits[idx] = None
 
         try:
             asn, prefix, cc, rir, dt = bits
