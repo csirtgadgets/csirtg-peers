@@ -1,10 +1,11 @@
 # CSIRTG-PEERS
 
-The FASTEST way to get the Peers of a an ISP.
+The FASTEST way to get the Peers of a an IS.
 
 # Examples
 ## Shell
 ```bash
+$ pip install csirtg-peers
 $ csirtg-peers 1.1.1.1
 
 {'asn': '174', 'cc': 'AU', 'prefix': '1.1.1.0/24', 'rir': 'apnic'}
